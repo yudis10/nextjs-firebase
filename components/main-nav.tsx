@@ -1,41 +1,43 @@
-import * as React from "react"
-import Link from "next/link"
+"use client"
 
-import { NavItem } from "@/types/nav"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
 
-interface MainNavProps {
-  items?: NavItem[]
-}
+const navLinks = siteConfig.mainNav
 
-export function MainNav({ items }: MainNavProps) {
+export function MainNav() {
+  const pathname = usePathname()
+
   return (
     <div className="flex gap-6 md:gap-10">
-      <Link href="/" className="flex items-center space-x-2">
+      <Link href="/" className="flex items-center gap-2 outline-gray-400">
         <Icons.logo className="h-6 w-6" />
         <span className="inline-block font-bold">{siteConfig.name}</span>
       </Link>
-      {items?.length ? (
-        <nav className="flex gap-6">
-          {items?.map(
-            (item, index) =>
-              item.href && (
-                <Link
-                  key={index}
-                  href={item.href}
-                  className={cn(
-                    "text-muted-foreground flex items-center text-sm font-medium",
-                    item.disabled && "cursor-not-allowed opacity-80"
-                  )}
-                >
-                  {item.title}
-                </Link>
-              )
-          )}
-        </nav>
-      ) : null}
+
+      <nav className="flex gap-6">
+        {navLinks?.map((item, index) => {
+          const isActive =
+            (pathname.includes(item.href) && item.href.length > 1) ||
+            pathname === item.href
+          return (
+            <Link
+              key={index}
+              href={item.href}
+              className={cn(
+                "flex items-center text-sm font-medium text-muted-foreground outline-gray-400",
+                isActive && "font-bold underline"
+              )}
+            >
+              {item.title}
+            </Link>
+          )
+        })}
+      </nav>
     </div>
   )
 }

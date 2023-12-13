@@ -9,6 +9,10 @@ export const siteConfig = {
       title: "Home",
       href: "/",
     },
+    {
+      title: "Friends",
+      href: "/friends",
+    },
   ],
   links: {
     twitter: "https://twitter.com/detikcom",

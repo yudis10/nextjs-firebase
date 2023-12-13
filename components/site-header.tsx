@@ -5,16 +5,18 @@ import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import { MainNav } from "@/components/main-nav"
 import { ThemeToggle } from "@/components/theme-toggle"
+import UserMenu from "@/components/UserMenu"
 
 export function SiteHeader() {
   return (
-    <header className="bg-background sticky top-0 z-40 w-full border-b">
-      <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
-        <MainNav items={siteConfig.mainNav} />
+    <header className="sticky top-0 z-40 w-full border-b bg-background">
+      <div className="container flex h-16 items-center gap-x-4 sm:justify-between sm:gap-x-0">
+        <MainNav />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-1">
             <Link
               href={siteConfig.links.github}
+              className="outline-gray-400"
               target="_blank"
               rel="noreferrer"
             >
@@ -30,6 +32,7 @@ export function SiteHeader() {
             </Link>
             <Link
               href={siteConfig.links.twitter}
+              className="outline-gray-400"
               target="_blank"
               rel="noreferrer"
             >
@@ -46,6 +49,7 @@ export function SiteHeader() {
             <ThemeToggle />
           </nav>
         </div>
+        <UserMenu />
       </div>
     </header>
   )
